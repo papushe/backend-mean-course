@@ -29,9 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('', (req, res) => {
-    res.sendFile(`${__dirname}/index.html`);
-});
+
 app.use('/api/posts', postsRoutes);
 app.use('/api/user', userRoutes);
 
