@@ -8,6 +8,7 @@ exports.createUser = async (req, res, next) => {
         const user = new User({
             email: req.body.email,
             password: hash,
+            fullName: req.body.fullName
         });
         let result = await user.save();
         res.status(201).json({
@@ -40,13 +41,14 @@ exports.userLogin = async (req, res, next) => {
         const token = jwt.sign({
                 email: fetchedUser.email,
                 userId: fetchedUser._id
-            }, process.env.JWT_KEY,
+            }, "secret_this_should_be_longer",
             {expiresIn: "1h"}
         );
         res.status(200).json({
             token: token,
             expiresIn: 3600,
-            userId: fetchedUser._id
+            userId: fetchedUser._id,
+            fullName: fetchedUser.fullName
         });
     } catch (e) {
         return res.status(401).json({
