@@ -26,7 +26,6 @@ const storage = multer.diskStorage({
         const ext = MIME_TYPE_MAP[file.mimetype];
         cb(null, name + '-' + Date.now() + '.' + ext);
     }
-
 });
 
 module.exports = multer({storage: storage}).single("image");
